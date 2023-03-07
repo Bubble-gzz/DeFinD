@@ -563,7 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1c5a681d574d2c4ebc8e52670fcd489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 4891786815119089985, guid: 1e254954d19d229418f25cceca2d62cd, type: 3}
+  cardPrefab: {fileID: 7510484210693341985, guid: 74e985bdd69f27c42b4ace619c0511f0, type: 3}
   interactable: 1
   alignment: 1
   maxWidth: 14

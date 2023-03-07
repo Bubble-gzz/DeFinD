@@ -63,13 +63,13 @@ public class Card : SmoothObject
     {
         selected = false;
     }
-    public void Pick()
+    virtual public void Pick()
     {
         picked = true;
         GetComponent<Renderer>().material.color = PickedColor;
         transform.localScale = new Vector3(0.9f, 0.9f, 1);
     }
-    public void Unpick()
+    virtual public void Unpick()
     {
         picked = false;
         GetComponent<Renderer>().material.color = originalColor;
