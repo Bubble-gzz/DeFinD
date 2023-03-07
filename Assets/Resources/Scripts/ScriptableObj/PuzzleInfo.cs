@@ -8,11 +8,16 @@ public class PuzzleInfo : ScriptableObject
 {
     public List<string> rules;
     public string Init;
-    public string Target;
     [Serializable]
     public class TextureTableElement{
         public char letter;
         public Texture2D texture;
     }
+    [Serializable]
+    public class TargetElement{
+        public string s;
+        public int count;
+    }
+    public List<TargetElement> Targets;
     public List<TextureTableElement> textureTable;
 }
