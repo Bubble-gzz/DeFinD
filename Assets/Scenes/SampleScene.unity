@@ -346,9 +346,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 4891786815119089985, guid: 1e254954d19d229418f25cceca2d62cd, type: 3}
+  interactive: 1
+  alignment: 0
   maxWidth: 14
   cardInterval: 1.5
-  selectedCard: {fileID: 0}
   selectIcon: {fileID: 1246167651}
 --- !u!4 &1682751808
 Transform:

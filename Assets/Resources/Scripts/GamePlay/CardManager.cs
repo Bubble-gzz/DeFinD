@@ -5,16 +5,24 @@ using UnityEngine;
 public class CardManager : MonoBehaviour
 {
     // Start is called before the first frame update
+    public enum Alignment{
+        Left,
+        Center,
+        Right
+    }
     [SerializeField]
     GameObject cardPrefab;
+    public bool interactive;
+    public Alignment alignment;
     public float maxWidth;
     public float cardInterval;
     List<Card> cards;
-    public Card selectedCard;
+    Card selectedCard;
     [SerializeField]
     SmoothObject selectIcon;
     void Start()
     {
+        selectIcon.gameObject.SetActive(false);
         cards = new List<Card>();
         selectedCard = null;
     }
@@ -27,6 +35,7 @@ public class CardManager : MonoBehaviour
     }
     void UserInput()
     {
+        if (!interactive) return;
         if (Input.GetKeyDown(KeyCode.A))
         {
             AddCard(0);
@@ -49,6 +58,7 @@ public class CardManager : MonoBehaviour
     }
     void UpdateSelectIcon()
     {
+        if (!interactive) return;
         if (cards.Count == 0)
         {
             selectIcon.gameObject.SetActive(false);
@@ -95,10 +105,18 @@ public class CardManager : MonoBehaviour
     void UpdatePos()
     {
         float pos, interval;
+        
         if ((cards.Count - 1) * cardInterval > maxWidth) interval = maxWidth / (cards.Count - 1);
         else interval = cardInterval;
-        if (cards.Count % 2 == 0) pos = - (cards.Count / 2 - 0.5f) * interval;
-        else pos = - (cards.Count / 2) * interval;
+        
+        if (alignment == Alignment.Center)
+        {
+            if (cards.Count % 2 == 0) pos = - (cards.Count / 2 - 0.5f) * interval;
+            else pos = - (cards.Count / 2) * interval;
+        }
+        else if (alignment == Alignment.Right) pos = - cards.Count * interval;
+        else pos = 0;
+
         for (int i = 0; i < cards.Count; i++)
         {
             cards[i].targetPos = new Vector2(pos, 0);
