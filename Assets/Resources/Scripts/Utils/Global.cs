@@ -5,4 +5,6 @@ using UnityEngine;
 public class Global
 {
     static public Camera mainCam;
+    static public string puzzleName;
+    static public PuzzleInfo puzzleInfo;
 }

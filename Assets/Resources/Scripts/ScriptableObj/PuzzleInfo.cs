@@ -11,7 +11,7 @@ public class PuzzleInfo : ScriptableObject
     [Serializable]
     public class TextureTableElement{
         public char letter;
-        public Texture2D texture;
+        public Sprite texture;
     }
     [Serializable]
     public class TargetElement{
@@ -20,4 +20,13 @@ public class PuzzleInfo : ScriptableObject
     }
     public List<TargetElement> Targets;
     public List<TextureTableElement> textureTable;
+    public Sprite GetSprite(char ch)
+    {
+        foreach(var element in textureTable)
+        {
+            if (element.letter == ch)
+                return element.texture;
+        }
+        return null;
+    }
 }

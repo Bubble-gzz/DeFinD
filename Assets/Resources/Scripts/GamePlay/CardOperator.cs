@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 public class CardOperator : CardManager
 {
-    public string puzzleName;
     PuzzleInfo puzzleInfo;
     override protected void Awake()
     {
         base.Awake();
-        puzzleInfo = Resources.Load<PuzzleInfo>("PuzzleData/" + puzzleName);
     }
     override protected void Start()
     {
         base.Start();
+        puzzleInfo = Global.puzzleInfo;
         CreateCards(puzzleInfo.Init);
     }
 
@@ -28,8 +28,5 @@ public class CardOperator : CardManager
             newCard.text.text = ch.ToString();
         }
     }
-    void ParseRules()
-    {
-        
-    }
+
 }
