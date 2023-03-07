@@ -96,4 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPos: {x: 0, y: 0}
-  followSpeed: 20
+  posFollowSpeed: 20
+  targetSize: {x: 0, y: 0}
+  sizeFollowSpeed: 20
+  PickedColor: {r: 1, g: 0.6633873, b: 0.12803233, a: 0.46666667}
+  picked: 0

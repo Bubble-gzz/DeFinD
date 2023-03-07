@@ -5,10 +5,12 @@ using UnityEngine;
 public class SmoothObject : MonoBehaviour
 {
     public Vector2 targetPos;
-    public float followSpeed = 1f;
+    public float posFollowSpeed = 1f;
+    public Vector2 targetSize;
+    public float sizeFollowSpeed = 1f;
     virtual protected void Awake()
     {
-
+        targetSize = new Vector3(1, 1, 1);
     }
     virtual protected void Start()
     {
@@ -20,6 +22,7 @@ public class SmoothObject : MonoBehaviour
     {
         //targetPos = Global.mainCam.ScreenToWorldPoint(Input.mousePosition);
         CheckPos();
+        CheckSize();
     }
     virtual public void SelfDestroy()
     {
@@ -29,6 +32,12 @@ public class SmoothObject : MonoBehaviour
     {
         Vector3 offset = (Vector3)targetPos - transform.localPosition;
         if (offset.magnitude < 0.01f) transform.localPosition = targetPos;
-        else transform.localPosition = Vector3.Lerp(transform.localPosition, targetPos, followSpeed * Time.deltaTime);
+        else transform.localPosition = Vector3.Lerp(transform.localPosition, targetPos, posFollowSpeed * Time.deltaTime);
+    }
+    void CheckSize()
+    {
+        Vector3 offset = (Vector3)targetSize - transform.localScale;
+        if (offset.magnitude < 0.01f) transform.localScale = targetSize;
+        else transform.localScale = Vector3.Lerp(transform.localScale, targetSize, sizeFollowSpeed * Time.deltaTime);    
     }
 }
