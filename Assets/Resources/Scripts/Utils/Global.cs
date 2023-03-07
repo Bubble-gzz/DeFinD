@@ -7,4 +7,6 @@ public class Global
     static public Camera mainCam;
     static public string puzzleName;
     static public PuzzleInfo puzzleInfo;
+    static public CardOperator cardOperator;
+    static public RulePanel rulePanel;
 }

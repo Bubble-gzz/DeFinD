@@ -22,11 +22,11 @@ public class GameCard : Card
     override public void Pick()
     {
         base.Pick();
-        cardOperator.Refresh();
+        Global.rulePanel.DetectRulePatterns();
     }
     public override void Unpick()
     {
         base.Unpick();
-        cardOperator.Refresh();
+        Global.rulePanel.DetectRulePatterns();
     }
 }
