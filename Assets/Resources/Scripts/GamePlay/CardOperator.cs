@@ -13,6 +13,7 @@ public class CardOperator : CardManager
         base.Awake();
         cardS = new StringBuilder();
         Global.cardOperator = this;
+        ReplaceOptions = new List<ReplaceOption>();
     }
     override protected void Start()
     {
@@ -30,7 +31,6 @@ public class CardOperator : CardManager
         foreach(char ch in s)
         {
             GameCard newCard = (GameCard)AddCard(cards.Count);
-            newCard.cardOperator = this;
             newCard.ch = ch;
             newCard.cover.sprite = puzzleInfo.GetSprite(ch);
             cardS.Append(ch);
@@ -67,4 +67,5 @@ public class CardOperator : CardManager
         if (seg == 1) return res.ToString();
         return null; 
     }
+    public List<ReplaceOption> ReplaceOptions;
 }

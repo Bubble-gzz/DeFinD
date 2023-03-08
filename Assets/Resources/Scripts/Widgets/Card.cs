@@ -5,7 +5,6 @@ using TMPro;
 
 public class Card : SmoothObject
 {
-    public bool interactable;
     public Color PickedColor;
     Color originalColor;
     bool selected;
@@ -30,7 +29,6 @@ public class Card : SmoothObject
     override protected void Update()
     {
         base.Update();
-        UserInput();
         SizeCheck();
     }
     void SizeCheck()
@@ -38,18 +36,6 @@ public class Card : SmoothObject
         if (!picked & !selected) targetSize = normalSize;
         else if (selected) targetSize = selectedSize;
         else targetSize = pickedSize;
-    }
-    void UserInput()
-    {
-        if (!interactable) return;
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (selected)
-            {
-                if (picked) Unpick();
-                else Pick();
-            }
-        }
     }
     override public void SelfDestroy()
     {
@@ -62,6 +48,11 @@ public class Card : SmoothObject
     public void Deselect()
     {
         selected = false;
+    }
+    public void Hit()
+    {
+        if (picked) Unpick();
+        else Pick();
     }
     virtual public void Pick()
     {

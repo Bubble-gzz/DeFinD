@@ -8,7 +8,6 @@ public class GameCard : Card
     // Start is called before the first frame update
     public Image cover;
     public char ch;
-    public CardOperator cardOperator;
     override protected void Start()
     {
         base.Start();

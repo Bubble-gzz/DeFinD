@@ -31,7 +31,7 @@ public class SmoothObject : MonoBehaviour
     void CheckPos()
     {
         Vector3 offset = (Vector3)targetPos - transform.localPosition;
-        if (offset.magnitude < 0.01f) transform.localPosition = targetPos;
+        if (offset.magnitude < 0.001f) transform.localPosition = targetPos;
         else transform.localPosition = Vector3.Lerp(transform.localPosition, targetPos, posFollowSpeed * Time.deltaTime);
     }
     void CheckSize()

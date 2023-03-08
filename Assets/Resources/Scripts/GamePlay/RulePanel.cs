@@ -12,6 +12,7 @@ public class RulePanel : MonoBehaviour
     public GameObject RulePrefab;
     public Sprite toSymbol, equalSymbol, orSymbol;
     CardOperator cardOperator;
+    public GameObject replaceOptionPrefab;
     void Awake()
     {
         Global.rulePanel = this;
@@ -21,6 +22,7 @@ public class RulePanel : MonoBehaviour
         puzzleInfo = Global.puzzleInfo;
         ParseRules();
         cardOperator = Global.cardOperator;
+        ReplaceOptions = cardOperator.ReplaceOptions;
     }
 
     // Update is called once per frame
@@ -67,8 +69,7 @@ public class RulePanel : MonoBehaviour
                 if (ch == '=' || ch == '>')
                 {
                     onLeftSide = false;
-                    if (ch == '=') newRule.directed = false;
-                    else newRule.directed = true;
+                    newRule.directed = (ch == '>');
                 }
             }
         }
@@ -98,6 +99,22 @@ public class RulePanel : MonoBehaviour
             foreach(var pattern in rule.rightSide)
                 rule.rightMatch |= PatternMatch(cardOperator.SelectedS(), pattern);
         }
+        UpdateReplaceOptions();
+    }
+    void UpdateReplaceOptions()
+    {
+        foreach(var option in ReplaceOptions) option.Leave();
+        ReplaceOptions.Clear();
+        foreach(var rule in rules)
+        {
+            if (rule.leftMatch)
+                foreach(var s in rule.rightSide)
+                {
+                    ReplaceOption newOption = Instantiate(replaceOptionPrefab).GetComponent<ReplaceOption>();
+                    ReplaceOptions.Add(newOption);
+                    newOption.cardS = s;
+                }
+        }
     }
     
     bool PatternMatch(string s, string t)
@@ -122,4 +139,5 @@ public class RulePanel : MonoBehaviour
         }
     }
     public List<Rule> rules;
+    List<ReplaceOption> ReplaceOptions;
 }
