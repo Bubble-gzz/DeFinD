@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Card : SmoothObject
+public class Card : SmoothObject, ISelectable
 {
     public Color PickedColor;
     Color originalColor;
@@ -41,13 +41,9 @@ public class Card : SmoothObject
     {
         Destroy(gameObject);
     }
-    public void Select()
+    public void SetHighlight(bool flag)
     {
-        selected = true;
-    }
-    public void Deselect()
-    {
-        selected = false;
+        selected = flag;
     }
     public void Hit()
     {

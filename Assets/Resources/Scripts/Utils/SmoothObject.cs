@@ -10,7 +10,7 @@ public class SmoothObject : MonoBehaviour
     public float sizeFollowSpeed = 1f;
     virtual protected void Awake()
     {
-        targetSize = new Vector3(1, 1, 1);
+        targetSize = new Vector2(1, 1);
     }
     virtual protected void Start()
     {

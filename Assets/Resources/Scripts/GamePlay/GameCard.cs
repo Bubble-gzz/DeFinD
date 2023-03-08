@@ -23,7 +23,7 @@ public class GameCard : Card
         base.Pick();
         Global.rulePanel.DetectRulePatterns();
     }
-    public override void Unpick()
+    override public void Unpick()
     {
         base.Unpick();
         Global.rulePanel.DetectRulePatterns();

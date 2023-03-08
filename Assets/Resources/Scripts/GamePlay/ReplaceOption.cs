@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ReplaceOption : CardManager
+public class ReplaceOption : ItemLayout
 {
     // Start is called before the first frame update
+    public GameObject CardPrefab;
     PuzzleInfo puzzleInfo;
     public string cardS;
-    public SmoothObject motion;
     protected override void Awake()
     {
         base.Awake();
-        motion = GetComponent<SmoothObject>();
     }
     override protected void Start()
     {
@@ -29,7 +28,8 @@ public class ReplaceOption : CardManager
     {
         foreach(char ch in s)
         {
-            GameCard newCard = (GameCard)AddCard(cards.Count);
+            GameCard newCard = Instantiate(CardPrefab, transform).GetComponent<GameCard>();
+            AppendItem(newCard.transform);
             newCard.ch = ch;
             newCard.cover.sprite = puzzleInfo.GetSprite(ch);
         }

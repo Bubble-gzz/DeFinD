@@ -546,7 +546,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1682751808}
   - component: {fileID: 1682751807}
-  - component: {fileID: 1682751809}
   m_Layer: 0
   m_Name: CardOperator
   m_TagString: Untagged
@@ -566,13 +565,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1c5a681d574d2c4ebc8e52670fcd489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 7510484210693341985, guid: 74e985bdd69f27c42b4ace619c0511f0, type: 3}
-  interactable: 1
   alignment: 1
   maxWidth: 14
-  cardInterval: 1.5
+  defaultInterval: 1.5
   minInterval: 1.2
+  posFollowSpeed: 0
+  sizeFollowSpeed: 0
   selectIcon: {fileID: 1246167651}
+  cardPrefab: {fileID: 7510484210693341985, guid: 74e985bdd69f27c42b4ace619c0511f0, type: 3}
   ReplaceOptions: []
 --- !u!4 &1682751808
 Transform:
@@ -589,22 +589,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1682751809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1682751806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b61031fbec5ac7c4cb66b2a59f01bef2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetPos: {x: 0, y: -1.5}
-  posFollowSpeed: 50
-  targetSize: {x: 0, y: 0}
-  sizeFollowSpeed: 40
 --- !u!1 &1813745945
 GameObject:
   m_ObjectHideFlags: 0

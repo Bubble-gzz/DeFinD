@@ -44,14 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e0dc066c4c2e564499442db31adf2de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 7510484210693341985, guid: 74e985bdd69f27c42b4ace619c0511f0, type: 3}
-  interactable: 0
   alignment: 0
   maxWidth: 14
-  cardInterval: 1.5
-  selectIcon: {fileID: 0}
+  defaultInterval: 0
+  minInterval: 0
+  posFollowSpeed: 0
+  sizeFollowSpeed: 0
+  CardPrefab: {fileID: 7510484210693341985, guid: 74e985bdd69f27c42b4ace619c0511f0, type: 3}
   cardS: 
-  motion: {fileID: 0}
 --- !u!114 &7249314746416105668
 MonoBehaviour:
   m_ObjectHideFlags: 0
