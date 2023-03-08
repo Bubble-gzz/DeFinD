@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ReplaceOption : ItemLayout
 {
@@ -8,6 +9,8 @@ public class ReplaceOption : ItemLayout
     public GameObject CardPrefab;
     PuzzleInfo puzzleInfo;
     public string cardS;
+    public TMP_Text text;
+    public GameObject rootObject;
     protected override void Awake()
     {
         base.Awake();
@@ -40,7 +43,14 @@ public class ReplaceOption : ItemLayout
     }
     public void Leave()
     {
-        
+        motion.targetSize = new Vector2(1, 0);
+        StartCoroutine(Leave_C());
+    }
+    IEnumerator Leave_C()
+    {
+        text.enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        Destroy(rootObject);
     }
     public void Use()
     {

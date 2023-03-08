@@ -8,9 +8,11 @@ public class SmoothObject : MonoBehaviour
     public float posFollowSpeed = 1f;
     public Vector2 targetSize;
     public float sizeFollowSpeed = 1f;
+    public bool settledDown;
     virtual protected void Awake()
     {
         targetSize = new Vector2(1, 1);
+        settledDown = false;
     }
     virtual protected void Start()
     {
@@ -31,8 +33,14 @@ public class SmoothObject : MonoBehaviour
     void CheckPos()
     {
         Vector3 offset = (Vector3)targetPos - transform.localPosition;
-        if (offset.magnitude < 0.001f) transform.localPosition = targetPos;
-        else transform.localPosition = Vector3.Lerp(transform.localPosition, targetPos, posFollowSpeed * Time.deltaTime);
+        if (offset.magnitude < 0.001f) {
+            transform.localPosition = targetPos;
+            settledDown = true;
+        }
+        else {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, targetPos, posFollowSpeed * Time.deltaTime);
+            settledDown = false;
+        }
     }
     void CheckSize()
     {

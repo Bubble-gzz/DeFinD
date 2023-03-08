@@ -13,6 +13,7 @@ public class RulePanel : MonoBehaviour
     public Sprite toSymbol, equalSymbol, orSymbol;
     CardOperator cardOperator;
     public GameObject replaceOptionPrefab;
+    public ItemLayout optionLayout;
     void Awake()
     {
         Global.rulePanel = this;
@@ -101,8 +102,12 @@ public class RulePanel : MonoBehaviour
         }
         UpdateReplaceOptions();
     }
+    List<char> commands = new List<char>{
+        'A','B','C','D','E','F','G','H','I','J','K'
+    };
     void UpdateReplaceOptions()
-    {
+    {   
+        optionLayout.ClearItems();
         foreach(var option in ReplaceOptions) option.Leave();
         ReplaceOptions.Clear();
         foreach(var rule in rules)
@@ -110,10 +115,23 @@ public class RulePanel : MonoBehaviour
             if (rule.leftMatch)
                 foreach(var s in rule.rightSide)
                 {
-                    ReplaceOption newOption = Instantiate(replaceOptionPrefab).GetComponent<ReplaceOption>();
+                    ReplaceOption newOption = Instantiate(replaceOptionPrefab).GetComponentInChildren<ReplaceOption>();
+                    newOption.rootObject.transform.position = new Vector3(0, 15, 0);
                     ReplaceOptions.Add(newOption);
                     newOption.cardS = s;
+                    optionLayout.AppendItem(newOption.rootObject.transform);
                 }
+        }
+        if (ReplaceOptions.Count > 0)
+        {
+            int i = 0;
+            foreach(var option in ReplaceOptions)
+            {
+                option.maxWidth = optionLayout.maxWidth / (ReplaceOptions.Count + 1) * 0.7f;
+                if (ReplaceOptions.Count > 1) option.text.text = commands[i].ToString();
+                else option.text.text = "Enter";
+                i++;
+            }
         }
     }
     

@@ -8,7 +8,8 @@ public class ItemLayout : MonoBehaviour
     public enum Alignment{
         Left,
         Center,
-        Right
+        Right,
+        Spread
     }
     public Alignment alignment;
     public float maxWidth;
@@ -52,6 +53,7 @@ public class ItemLayout : MonoBehaviour
         SmoothObject itemMotion = newItem.GetComponent<SmoothObject>();
         if (itemMotion == null) itemMotion = newItem.gameObject.AddComponent<SmoothObject>();
         items.Insert(pos, itemMotion);
+        newItem.SetParent(transform);
         UpdatePos();
         return newItem;
     }
@@ -63,6 +65,10 @@ public class ItemLayout : MonoBehaviour
     {
         items.RemoveAt(pos);
         UpdatePos();
+    }
+    virtual public void ClearItems()
+    {
+        items.Clear();
     }
     public void UpdatePos()
     {
@@ -83,8 +89,11 @@ public class ItemLayout : MonoBehaviour
             else pos = - (items.Count / 2) * interval;
         }
         else if (alignment == Alignment.Right) pos = - items.Count * interval;
-        else pos = 0;
-
+        else if (alignment == Alignment.Left) pos = 0;
+        else {
+            interval = maxWidth / (items.Count + 1);
+            pos = - maxWidth / 2 + interval;
+        }
         for (int i = 0; i < items.Count; i++)
         {
             items[i].targetPos = new Vector2(pos, 0);

@@ -435,7 +435,75 @@ MonoBehaviour:
   equalSymbol: {fileID: 21300000, guid: 5146089ef8209f44082b9e05728d4591, type: 3}
   orSymbol: {fileID: 21300000, guid: ae5403a4e15745b43a18ac97bd9c6349, type: 3}
   replaceOptionPrefab: {fileID: 557946638624012810, guid: 4064736be6e7a324b895c246abd2ba5e, type: 3}
+  optionLayout: {fileID: 964384494}
   rules: []
+--- !u!1 &964384493
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 964384495}
+  - component: {fileID: 964384494}
+  - component: {fileID: 964384496}
+  m_Layer: 0
+  m_Name: OptionLayout
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &964384494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964384493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b09e346d45e99004e9d1b3b90d812403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alignment: 3
+  maxWidth: 14
+  defaultInterval: 4
+  minInterval: 4
+  posFollowSpeed: 40
+  sizeFollowSpeed: 40
+--- !u!4 &964384495
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964384493}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &964384496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964384493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b61031fbec5ac7c4cb66b2a59f01bef2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPos: {x: 0, y: 1.5}
+  posFollowSpeed: 50
+  targetSize: {x: 0.7, y: 0.7}
+  sizeFollowSpeed: 40
+  settledDown: 0
 --- !u!1 &1246167648
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,6 +604,7 @@ MonoBehaviour:
   posFollowSpeed: 45
   targetSize: {x: 0, y: 0}
   sizeFollowSpeed: 50
+  settledDown: 0
 --- !u!1 &1682751806
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,6 +615,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1682751808}
   - component: {fileID: 1682751807}
+  - component: {fileID: 1682751809}
   m_Layer: 0
   m_Name: CardOperator
   m_TagString: Untagged
@@ -589,6 +659,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1682751809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682751806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b61031fbec5ac7c4cb66b2a59f01bef2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPos: {x: 0, y: -1.5}
+  posFollowSpeed: 50
+  targetSize: {x: 1, y: 1}
+  sizeFollowSpeed: 40
+  settledDown: 0
 --- !u!1 &1813745945
 GameObject:
   m_ObjectHideFlags: 0
