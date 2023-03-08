@@ -407,11 +407,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPos: {x: 0, y: 0}
-  posFollowSpeed: 45
+  posFollowSpeed: 20
   targetSize: {x: 0, y: 0}
   sizeFollowSpeed: 45
-  interactable: 1
+  settledDown: 0
   PickedColor: {r: 0.8867924, g: 0.5941148, b: 0.14700194, a: 0.6431373}
   picked: 0
   text: {fileID: 0}
   cover: {fileID: 128047202712274959}
+  ch: 0

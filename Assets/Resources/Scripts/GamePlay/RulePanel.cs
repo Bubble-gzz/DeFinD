@@ -121,13 +121,22 @@ public class RulePanel : MonoBehaviour
                     newOption.cardS = s;
                     optionLayout.AppendItem(newOption.rootObject.transform);
                 }
+            if (rule.rightMatch)
+                foreach(var s in rule.leftSide)
+                {
+                    ReplaceOption newOption = Instantiate(replaceOptionPrefab).GetComponentInChildren<ReplaceOption>();
+                    newOption.rootObject.transform.position = new Vector3(0, 10, 0);
+                    ReplaceOptions.Add(newOption);
+                    newOption.cardS = s;
+                    optionLayout.AppendItem(newOption.rootObject.transform);
+                }
         }
         if (ReplaceOptions.Count > 0)
         {
             int i = 0;
             foreach(var option in ReplaceOptions)
             {
-                option.maxWidth = optionLayout.maxWidth / (ReplaceOptions.Count + 1) * 0.7f;
+                option.maxWidth = optionLayout.maxWidth / (ReplaceOptions.Count + 1) * 0.4f;
                 if (ReplaceOptions.Count > 1) option.text.text = commands[i].ToString();
                 else option.text.text = "Enter";
                 i++;

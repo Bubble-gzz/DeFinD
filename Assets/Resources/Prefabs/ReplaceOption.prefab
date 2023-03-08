@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPos: {x: 0, y: 0}
-  posFollowSpeed: 20
+  posFollowSpeed: 9
   targetSize: {x: 0, y: 0}
   sizeFollowSpeed: 50
   settledDown: 0
@@ -233,6 +233,7 @@ MonoBehaviour:
   minInterval: 1.2
   posFollowSpeed: 12
   sizeFollowSpeed: 40
+  items: []
   CardPrefab: {fileID: 7510484210693341985, guid: 74e985bdd69f27c42b4ace619c0511f0, type: 3}
   cardS: 
   text: {fileID: 2307764509444477512}

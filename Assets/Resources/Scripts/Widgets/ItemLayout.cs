@@ -19,7 +19,7 @@ public class ItemLayout : MonoBehaviour
     public float posFollowSpeed;
     public float sizeFollowSpeed;
 
-    protected List<SmoothObject> items;
+    public List<SmoothObject> items;
     protected SmoothObject motion;
     virtual protected void Awake()
     {
@@ -76,7 +76,7 @@ public class ItemLayout : MonoBehaviour
         
         if ((items.Count - 1) * defaultInterval > maxWidth) interval = maxWidth / (items.Count - 1);
         else interval = defaultInterval;
-        if (interval < minInterval)
+        if (interval < minInterval && alignment != Alignment.Spread)
         {
             motion.targetSize = new Vector2(interval / minInterval, interval / minInterval);
             interval = minInterval;

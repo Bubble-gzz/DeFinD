@@ -28,4 +28,14 @@ public class GameCard : Card
         base.Unpick();
         Global.rulePanel.DetectRulePatterns();
     }
+    public void Leave()
+    {
+        targetSize = new Vector2(1, 0);
+        StartCoroutine(Leave_C());
+    }
+    IEnumerator Leave_C()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
+    }
 }

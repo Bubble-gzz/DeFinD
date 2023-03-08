@@ -60,6 +60,13 @@ public class ItemSelector : ItemLayout
             selectIcon.targetPos = selectedItem.transform.localPosition;  
         }
     }
+    public override void DelItem(int pos)
+    {
+        base.DelItem(pos);
+        if (items.Count == 0) selectedItem = null;
+        else if (pos >= items.Count) ReSelect(items[items.Count - 1] as ISelectable);
+        else ReSelect(items[pos] as ISelectable);
+    }
     int GetSelectedIndex()
     {
         if (selectedItem == null) return -1;

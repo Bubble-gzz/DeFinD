@@ -30,9 +30,38 @@ public class CardOperator : ItemSelector
         base.Update();
         UserInputs();
     }
+    List<KeyCode> commands = new List<KeyCode>(){
+        KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D,
+        KeyCode.E, KeyCode.F, KeyCode.G, KeyCode.H,
+    };
     void UserInputs()
     {
-
+        for (int i = 0; i < ReplaceOptions.Count; i++)
+            if (Input.GetKeyDown(commands[i]) || (i == 0 && Input.GetKeyDown(KeyCode.Return)))
+            {
+                PickOption(i);
+                break;
+            }
+    }
+    void PickOption(int index)
+    {
+        while ((items[firstSelectedPos] as Card).picked)
+        {
+            (items[firstSelectedPos] as GameCard).Leave();
+            DelCard(firstSelectedPos);
+            if (firstSelectedPos >= items.Count) break;
+        }
+        ReplaceOption option = ReplaceOptions[index];
+        for (int i = 0; i < ReplaceOptions.Count; i++)
+            if (i != index) ReplaceOptions[i].Leave();
+            else {
+                for (int j = option.items.Count - 1; j >= 0; j--)
+                {
+                    AddCard(firstSelectedPos, option.items[j] as GameCard);
+                }
+                ReplaceOptions[i].Leave();
+            }
+        ReplaceOptions.Clear();
     }
     void CreateCards(string s)
     {
@@ -61,6 +90,7 @@ public class CardOperator : ItemSelector
         DelItem(pos);
         cardS.Remove(pos, 1);
     }
+    int firstSelectedPos;
     public string SelectedS()
     {
         int seg = 0;
@@ -70,13 +100,15 @@ public class CardOperator : ItemSelector
         {
             if (items[i].GetComponent<GameCard>().picked)
             {
-                if (!flag) seg++;
+                if (!flag) {
+                    seg++;
+                    if (seg == 1) firstSelectedPos = i;
+                }
                 flag = true;
                 res.Append(cardS[i]);
             }
             else flag = false;
         }
-        //Debug.Log("SelectedS:" + res.ToString());
         if (seg == 1) return res.ToString();
         return null; 
     }
