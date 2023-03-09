@@ -30,6 +30,7 @@ public class GameCard : Card
     }
     public void Leave()
     {
+        destroyed = true;
         targetSize = new Vector2(1, 0);
         StartCoroutine(Leave_C());
     }

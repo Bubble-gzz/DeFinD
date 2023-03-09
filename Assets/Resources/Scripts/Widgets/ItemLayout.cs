@@ -12,6 +12,7 @@ public class ItemLayout : MonoBehaviour
         Spread
     }
     public Alignment alignment;
+    public bool nested;
     public float maxWidth;
     public float defaultInterval;
     public float minInterval;
@@ -71,6 +72,17 @@ public class ItemLayout : MonoBehaviour
         items.Clear();
     }
     public void UpdatePos()
+    {
+        if (nested) UpdatePos_Uneven();
+        else UpdatePos_Even();
+
+    }
+    void UpdatePos_Uneven()
+    {
+
+
+    }
+    void UpdatePos_Even()
     {
         float pos, interval;
         

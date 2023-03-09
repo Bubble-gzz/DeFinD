@@ -42,7 +42,7 @@ public class RulePanel : MonoBehaviour
                 GameObject newItem = new GameObject();
                 newItem.AddComponent<Image>();
                 newItem.GetComponent<Image>().sprite = GetSprite(ch);
-                newItem.GetComponent<RectTransform>().sizeDelta = new Vector2(50, 50);
+                newItem.GetComponent<RectTransform>().sizeDelta = new Vector2(30, 30);
                 newItem.transform.SetParent(newRule.transform);
             }
         }

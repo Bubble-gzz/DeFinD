@@ -47,7 +47,6 @@ public class CardOperator : ItemSelector
     {
         while ((items[firstSelectedPos] as Card).picked)
         {
-            (items[firstSelectedPos] as GameCard).Leave();
             DelCard(firstSelectedPos);
             if (firstSelectedPos >= items.Count) break;
         }
@@ -86,7 +85,7 @@ public class CardOperator : ItemSelector
     }
     void DelCard(int pos)
     {
-        items[pos].GetComponent<GameCard>().SelfDestroy();
+        items[pos].GetComponent<GameCard>().Leave();
         DelItem(pos);
         cardS.Remove(pos, 1);
     }
