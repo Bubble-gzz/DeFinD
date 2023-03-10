@@ -35,7 +35,7 @@ public class ItemLayout : MonoBehaviour
         motion.posFollowSpeed = posFollowSpeed;
         motion.sizeFollowSpeed = sizeFollowSpeed;
         items = new List<SmoothObject>();
-        if (minInterval < 0.001f) minInterval = 1.2f;
+        if (minInterval < 0.001f) minInterval = 1f;
     }
     virtual protected void Start()
     {
@@ -54,7 +54,11 @@ public class ItemLayout : MonoBehaviour
     virtual public Transform AddItem(int pos, Transform newItem)
     {
         SmoothObject itemMotion = newItem.GetComponent<SmoothObject>();
-        if (itemMotion == null) itemMotion = newItem.gameObject.AddComponent<SmoothObject>();
+        if (itemMotion == null) {
+            itemMotion = newItem.gameObject.AddComponent<SmoothObject>();
+            itemMotion.posFollowSpeed = 40f;
+            itemMotion.sizeFollowSpeed = 40f;
+        }
         items.Insert(pos, itemMotion);
         newItem.SetParent(transform);
         UpdatePos();

@@ -14,16 +14,28 @@ public class RulePanel : MonoBehaviour
     CardOperator cardOperator;
     public GameObject replaceOptionPrefab;
     public ItemLayout optionLayout;
+    public float maxWidth;
+    PanelSlider slider;
+    GameObject gameCardPrefab;
+    List<ItemLayout> pages;
     void Awake()
     {
         Global.rulePanel = this;
+        slider = GetComponentInChildren<PanelSlider>();
+        if (slider == null) Debug.Log("Rule Panel Slider Missing!");
+        slider.leftKey = KeyCode.Q;
+        slider.rightKey = KeyCode.E;
+        slider.pageWidth = maxWidth;
+        pages = new List<ItemLayout>();
     }
     void Start()
     {
         puzzleInfo = Global.puzzleInfo;
-        ParseRules();
         cardOperator = Global.cardOperator;
         ReplaceOptions = cardOperator.ReplaceOptions;
+        gameCardPrefab = Global.gameCardPrefab;
+        
+        ParseRules();
     }
 
     // Update is called once per frame
@@ -33,27 +45,16 @@ public class RulePanel : MonoBehaviour
     }
     void ParseRules()
     {
-        /* Create UI */
-        foreach(var rule in puzzleInfo.rules)
-        {
-            GameObject newRule = Instantiate(RulePrefab, transform);
-            foreach(char ch in rule)
-            {
-                GameObject newItem = new GameObject();
-                newItem.AddComponent<Image>();
-                newItem.GetComponent<Image>().sprite = GetSprite(ch);
-                newItem.GetComponent<RectTransform>().sizeDelta = new Vector2(30, 30);
-                newItem.transform.SetParent(newRule.transform);
-            }
-        }
-
+        
         /* Create Rules */
+        int pageCount = 1, pageID;
         foreach(string rule in puzzleInfo.rules)
         {
             bool onLeftSide = true;
             StringBuilder newS = new StringBuilder();
             Rule newRule = new Rule();
             rules.Add(newRule);
+            pageID = 0;
             for (int i = 0; i < rule.Length; i++)
             {
                 char ch = rule[i];
@@ -67,6 +68,12 @@ public class RulePanel : MonoBehaviour
                     else newRule.rightSide.Add(newS.ToString());
                     newS.Clear();
                 }
+                if (ch == '@')
+                {
+                    pageID = Utils.GetInt(rule, ref i);
+                    if (pageID + 1 > pageCount) pageCount = pageID + 1;
+                    continue;
+                }
                 if (ch == '=' || ch == '>')
                 {
                     onLeftSide = false;
@@ -74,6 +81,52 @@ public class RulePanel : MonoBehaviour
                 }
             }
         }
+        pages.Clear();
+        slider.Clear();
+        for (int i = 0; i < pageCount; i++)
+        {
+            GameObject newPage = new GameObject();
+            newPage.transform.localScale = new Vector3(1, 1, 1);
+            ItemLayout layoutSettings = newPage.AddComponent<ItemLayout>();
+            layoutSettings.maxWidth = maxWidth;
+            layoutSettings.alignment = ItemLayout.Alignment.Center;
+            layoutSettings.nested = true;
+            layoutSettings.defaultInterval = 1.2f;
+            layoutSettings.minInterval = 0.7f;
+            slider.AppendPage(newPage.transform);
+            pages.Add(layoutSettings);
+        }
+        /* Create UI */
+        foreach(var rule in puzzleInfo.rules)
+        {
+            ItemLayout newRule = Instantiate(RulePrefab).GetComponent<ItemLayout>();
+            pageID = 0;
+            for (int i = 0; i < rule.Length; i++)
+            {
+                char ch = rule[i];
+                if (ch == '@')
+                {
+                    pageID = Utils.GetInt(rule, ref i);
+                    continue;
+                }
+                if (isSpecialCharacter(ch))
+                {
+                    GameObject newSymbol = new GameObject();
+                    SpriteRenderer sr = newSymbol.AddComponent<SpriteRenderer>();
+                    sr.sprite = GetSprite(ch);
+                    newRule.AppendItem(newSymbol.transform);
+                }
+                else
+                {
+                    GameCard newCard = Instantiate(gameCardPrefab).GetComponent<GameCard>();
+                    newCard.ch = ch;
+                    newCard.cover.sprite = puzzleInfo.GetSprite(ch);
+                    newRule.AppendItem(newCard.transform);
+                }
+            }
+            pages[pageID].AppendItem(newRule.transform);
+        }
+
     }
     Sprite GetSprite(char ch)
     {
@@ -84,7 +137,7 @@ public class RulePanel : MonoBehaviour
     }
     bool isSpecialCharacter(char ch)
     {
-        return ch == '=' || ch == '>' || ch == '|';
+        return ch == '=' || ch == '>' || ch == '|' || ch == '@';
     }
 
     public void DetectRulePatterns()

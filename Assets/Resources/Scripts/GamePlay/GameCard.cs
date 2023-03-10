@@ -21,11 +21,19 @@ public class GameCard : Card
     override public void Pick()
     {
         base.Pick();
+        if (Global.rulePanel == null) {
+            Debug.Log("Rule Panel Missing!");
+            return;
+        }
         Global.rulePanel.DetectRulePatterns();
     }
     override public void Unpick()
     {
         base.Unpick();
+        if (Global.rulePanel == null) {
+            Debug.Log("Rule Panel Missing!");
+            return;
+        }
         Global.rulePanel.DetectRulePatterns();
     }
     public void Leave()
