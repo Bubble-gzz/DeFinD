@@ -14,6 +14,7 @@ public class ItemLayout : MonoBehaviour
     public Alignment alignment;
     public bool nested;
     public float maxWidth;
+    public float width;
     public float defaultInterval;
     public float minInterval;
 
@@ -33,11 +34,12 @@ public class ItemLayout : MonoBehaviour
         }
         motion.posFollowSpeed = posFollowSpeed;
         motion.sizeFollowSpeed = sizeFollowSpeed;
+        items = new List<SmoothObject>();
+        if (minInterval < 0.001f) minInterval = 1.2f;
     }
     virtual protected void Start()
     {
-        items = new List<SmoothObject>();
-        if (minInterval < 0.001f) minInterval = 1.2f;
+
     }
 
     // Update is called once per frame
@@ -79,15 +81,44 @@ public class ItemLayout : MonoBehaviour
     }
     void UpdatePos_Uneven()
     {
+        float pos, interval, totalWidth = 0;
+        int n = items.Count;
+        for (int i = 0; i < n; i++)
+        {
+            ItemLayout childLayout = items[i].GetComponentInChildren<ItemLayout>();
+            childLayout.UpdatePos();
+            totalWidth += childLayout.width;
+        }
+        //Debug.Log("n:" + n + "  totalWidth:" + totalWidth);
+        if (totalWidth + defaultInterval * (n - 1) <= maxWidth) interval = defaultInterval;
+        else interval = minInterval;
+        totalWidth += interval * (n - 1);
+        if (totalWidth > maxWidth)
+        {
+            motion.targetSize = new Vector2(maxWidth / totalWidth, maxWidth / totalWidth);
+        }
+        else motion.targetSize = new Vector2(1, 1);
 
-
+        pos = - totalWidth / 2;
+        for (int i = 0; i < n; i++)
+        {
+            float width = items[i].GetComponentInChildren<ItemLayout>().width;
+            //Debug.Log("width[" + i + "]:" + width);
+            pos +=  width / 2;
+            items[i].targetPos = new Vector2(pos, 0);
+            pos += interval + width / 2;            
+        }
+        width = Mathf.Min(totalWidth, maxWidth);
+        //Debug.Log("interval:" + interval + "  totalWidth:" + totalWidth);
     }
     void UpdatePos_Even()
     {
         float pos, interval;
+        int n = items.Count;
         
-        if ((items.Count - 1) * defaultInterval > maxWidth) interval = maxWidth / (items.Count - 1);
+        if ((n + 1) * defaultInterval > maxWidth) interval = maxWidth / (n + 1);
         else interval = defaultInterval;
+
         if (interval < minInterval && alignment != Alignment.Spread)
         {
             motion.targetSize = new Vector2(interval / minInterval, interval / minInterval);
@@ -97,20 +128,21 @@ public class ItemLayout : MonoBehaviour
 
         if (alignment == Alignment.Center)
         {
-            if (items.Count % 2 == 0) pos = - (items.Count / 2 - 0.5f) * interval;
-            else pos = - (items.Count / 2) * interval;
+            if (n % 2 == 0) pos = - (n / 2 - 0.5f) * interval;
+            else pos = - (n / 2) * interval;
         }
-        else if (alignment == Alignment.Right) pos = - items.Count * interval;
+        else if (alignment == Alignment.Right) pos = - n * interval;
         else if (alignment == Alignment.Left) pos = 0;
         else {
-            interval = maxWidth / (items.Count + 1);
+            interval = maxWidth / (n + 1);
             pos = - maxWidth / 2 + interval;
         }
-        for (int i = 0; i < items.Count; i++)
+        for (int i = 0; i < n; i++)
         {
             items[i].targetPos = new Vector2(pos, 0);
             pos += interval;
         }
-
+        width = Mathf.Min(maxWidth, interval * (n - 1 + 0.6f * 2));
+        //Debug.Log("child width after updatePos:" + width);
     }
 }

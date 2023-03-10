@@ -396,7 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c47dd773402fb45aea5c409ea080b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleName: 1-3
+  puzzleName: LongOption
 --- !u!1 &604606799
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,11 +549,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b09e346d45e99004e9d1b3b90d812403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alignment: 3
-  nested: 0
-  maxWidth: 9
-  defaultInterval: 4
-  minInterval: 4
+  alignment: 1
+  nested: 1
+  maxWidth: 10
+  width: 0
+  defaultInterval: 1.2
+  minInterval: 0.7
   posFollowSpeed: 40
   sizeFollowSpeed: 40
   items: []
@@ -722,6 +723,7 @@ MonoBehaviour:
   alignment: 1
   nested: 0
   maxWidth: 9
+  width: 0
   defaultInterval: 1.5
   minInterval: 1.2
   posFollowSpeed: 0

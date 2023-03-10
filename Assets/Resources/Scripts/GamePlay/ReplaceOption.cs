@@ -14,12 +14,13 @@ public class ReplaceOption : ItemLayout
     protected override void Awake()
     {
         base.Awake();
+        puzzleInfo = Global.puzzleInfo;
     }
     override protected void Start()
     {
         base.Start();
         puzzleInfo = Global.puzzleInfo;
-        CreateCards(cardS);
+        //CreateCards(cardS);
         Arrive();
     }
 
@@ -27,8 +28,9 @@ public class ReplaceOption : ItemLayout
     {
         base.Update();
     }
-    void CreateCards(string s)
+    public void CreateCards(string s)
     {
+        //Debug.Log("CreateCards:" + s);
         foreach(char ch in s)
         {
             GameCard newCard = Instantiate(CardPrefab, transform).GetComponent<GameCard>();
