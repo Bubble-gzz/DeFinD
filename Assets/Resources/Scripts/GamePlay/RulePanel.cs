@@ -114,6 +114,9 @@ public class RulePanel : MonoBehaviour
                     GameObject newSymbol = new GameObject();
                     SpriteRenderer sr = newSymbol.AddComponent<SpriteRenderer>();
                     sr.sprite = GetSprite(ch);
+                    sr.sortingLayerName = "UI";
+                    sr.sortingOrder = 1;
+                    sr.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
                     newRule.AppendItem(newSymbol.transform);
                 }
                 else
@@ -122,11 +125,12 @@ public class RulePanel : MonoBehaviour
                     newCard.ch = ch;
                     newCard.cover.sprite = puzzleInfo.GetSprite(ch);
                     newRule.AppendItem(newCard.transform);
+                    newCard.cover.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+                    newCard.bg.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
                 }
             }
             pages[pageID].AppendItem(newRule.transform);
         }
-
     }
     Sprite GetSprite(char ch)
     {

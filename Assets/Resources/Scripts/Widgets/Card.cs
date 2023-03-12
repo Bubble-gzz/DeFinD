@@ -14,11 +14,11 @@ public class Card : SmoothObject, ISelectable
     Vector3 pickedSize = new Vector3(1.1f, 1.1f, 1);
     Vector3 selectedSize = new Vector3(1.25f, 1.25f, 1);
     public TMP_Text text;
-    public Renderer bg;
+    public SpriteRenderer bg;
     override protected void Awake()
     {
         base.Awake();
-        originalColor = bg.material.color;
+        originalColor = bg.color;
         picked = false;
         destroyed = false;
         text = GetComponentInChildren<TMP_Text>();
@@ -57,13 +57,13 @@ public class Card : SmoothObject, ISelectable
     virtual public void Pick()
     {
         picked = true;
-        bg.material.color = PickedColor;
+        bg.color = PickedColor;
         transform.localScale = new Vector3(0.9f, 0.9f, 1);
     }
     virtual public void Unpick()
     {
         picked = false;
-        bg.material.color = originalColor;
+        bg.color = originalColor;
         transform.localScale = new Vector3(0.9f, 0.9f, 1);
     }
 }

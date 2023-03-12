@@ -6,17 +6,19 @@ public class PanelSlider : MonoBehaviour
 {
     // Start is called before the first frame update
     public int pageCount, curPage;
-    public float pageWidth;
+    public float pageWidth, pageInterval;
     SmoothObject motion;
     List<Transform> pages;
     public KeyCode leftKey, rightKey;
+    Vector3 originalSize;
     void Awake()
     {
         motion = gameObject.AddComponent<SmoothObject>();
-        motion.posFollowSpeed = 40f;
+        motion.posFollowSpeed = 30f;
         motion.sizeFollowSpeed = 40f;
 
         pages = new List<Transform>();
+        originalSize = transform.localScale;
     }
     void Start()
     {
@@ -68,8 +70,8 @@ public class PanelSlider : MonoBehaviour
             Vector2 targetPos = new Vector2(pos, 0);
             if (motion == null) pages[i].position = targetPos;
             else motion.targetPos = targetPos;
-            pos += pageWidth;
+            pos += pageWidth + pageInterval;
         }
-        motion.targetPos = new Vector2(-pageWidth * curPage, 0);
+        motion.targetPos = new Vector2(-(pageWidth + pageInterval) * curPage, 0);
     }
 }

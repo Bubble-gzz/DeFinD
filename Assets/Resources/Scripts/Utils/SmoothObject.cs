@@ -11,7 +11,7 @@ public class SmoothObject : MonoBehaviour
     public bool settledDown;
     virtual protected void Awake()
     {
-        targetSize = new Vector2(1, 1);
+        targetSize = transform.localScale;
         settledDown = false;
     }
     virtual protected void Start()
