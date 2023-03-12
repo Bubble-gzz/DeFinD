@@ -55,7 +55,9 @@ public class ItemSelector : ItemLayout
         }
         else
         {
-            if (selectedItem == null) selectedItem = items[0].GetComponent<ISelectable>();
+            if (selectedItem == null) {
+                ReSelect(items[0].GetComponent<ISelectable>());
+            }
             selectIcon.gameObject.SetActive(true);
             selectIcon.targetPos = selectedItem.transform.localPosition;  
         }

@@ -293,10 +293,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPos: {x: 0, y: 0}
+  targetColor: {r: 1, g: 1, b: 1, a: 1}
   posFollowSpeed: 20
   targetSize: {x: 0, y: 0}
-  sizeFollowSpeed: 35
+  sizeFollowSpeed: 30
+  colorFollowSpeed: 30
   settledDown: 0
+  colorSprite: {fileID: 0}
   PickedColor: {r: 0.5, g: 0.3761062, b: 0.32300887, a: 1}
   picked: 0
   text: {fileID: 0}
