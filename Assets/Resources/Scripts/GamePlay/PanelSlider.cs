@@ -91,7 +91,7 @@ public class PanelSlider : MonoBehaviour
     }
     public void EnlightNewIndex()
     {
-        Debug.Log("curPage: " + curPage + "  indexCount:" + indexes.Count);
+        //Debug.Log("curPage: " + curPage + "  indexCount:" + indexes.Count);
         if (lastEnlightedIndex == indexes[curPage]) return;
         if (lastEnlightedIndex != null && indexes[curPage] != lastEnlightedIndex)
         {

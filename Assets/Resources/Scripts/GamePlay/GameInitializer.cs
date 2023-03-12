@@ -9,15 +9,19 @@ public class GameInitializer : MonoBehaviour
     public GameObject gameCardPrefab;
     void Awake()
     {
-        Global.puzzleName = puzzleName;
-        Global.puzzleInfo = Resources.Load<PuzzleInfo>("PuzzleData/" + puzzleName);
         Global.gameCardPrefab = gameCardPrefab;
+        LoadPuzzle(puzzleName);
     }
     void Start()
     {
         
     }
-
+    public void LoadPuzzle(string puzzleName)
+    {
+        Global.puzzleName = puzzleName;
+        Global.puzzleInfo = Resources.Load<PuzzleInfo>("PuzzleData/" + puzzleName);
+        Global.puzzleComplete = false;
+    }
     // Update is called once per frame
     void Update()
     {

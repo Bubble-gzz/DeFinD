@@ -61,6 +61,7 @@ public class CardOperator : ItemSelector
                 ReplaceOptions[i].Leave();
             }
         ReplaceOptions.Clear();
+        Global.targetPanel.DetectTargets(cardS.ToString());
     }
     void CreateCards(string s)
     {

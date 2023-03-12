@@ -9,5 +9,7 @@ public class Global
     static public PuzzleInfo puzzleInfo;
     static public CardOperator cardOperator;
     static public RulePanel rulePanel;
+    static public TargetPanel targetPanel;
     static public GameObject gameCardPrefab;
+    static public bool puzzleComplete;
 }
