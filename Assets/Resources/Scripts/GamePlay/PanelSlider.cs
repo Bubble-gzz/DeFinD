@@ -13,14 +13,13 @@ public class PanelSlider : MonoBehaviour
     public GameObject smoothCirclePrefab;
     ItemLayout indexLayout;
     List<SmoothObject> indexes;
-    GameObject slider;
+    public GameObject slider;
     public Vector3 indexSize0, indexSize1;
     public Color indexColor0, indexColor1;
     SmoothObject lastEnlightedIndex;
     SmoothObject leftArrow, rightArrow;
     void Awake()
     {
-        slider = transform.Find("sub panel/Slider").gameObject;
         leftArrow = transform.Find("leftArrow").GetComponent<SmoothObject>();
         rightArrow = transform.Find("rightArrow").GetComponent<SmoothObject>();
 

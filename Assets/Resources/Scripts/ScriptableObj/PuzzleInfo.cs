@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Puzzle", menuName = "PuzzleInfo")]
 public class PuzzleInfo : ScriptableObject
 {
+    public string puzzleNickName;
     public List<string> rules;
     public string Init;
     [Serializable]
