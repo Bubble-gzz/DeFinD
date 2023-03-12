@@ -11,10 +11,12 @@ public class ReplaceOption : ItemLayout, ISelectable
     public string cardS;
     public TMP_Text text;
     public GameObject rootObject;
+    bool dead;
     protected override void Awake()
     {
         base.Awake();
         puzzleInfo = Global.puzzleInfo;
+        dead = false;
     }
     override protected void Start()
     {
@@ -27,6 +29,7 @@ public class ReplaceOption : ItemLayout, ISelectable
     override protected void Update()
     {
         base.Update();
+        
     }
     public void CreateCards(string s)
     {
@@ -45,6 +48,7 @@ public class ReplaceOption : ItemLayout, ISelectable
     }
     public void Leave()
     {
+        dead = true;
         motion.targetSize = new Vector2(1, 0);
         StartCoroutine(Leave_C());
     }
@@ -61,6 +65,7 @@ public class ReplaceOption : ItemLayout, ISelectable
 
     public void SetHighlight(bool flag)
     {
+        if (dead) return;
         if (flag)
         {
             motion.targetSize = new Vector2(1.2f, 1.2f);

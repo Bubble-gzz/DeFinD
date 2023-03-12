@@ -95,14 +95,16 @@ public class ItemSelector : ItemLayout
     public void SetActive(bool flag)
     {
         if (flag == active) return;
-        flag = active;
+        active = flag;
         if (!active)
         {
+            defaultSelectPos = GetSelectedIndex();
             ReSelect(null);
         }
         else
         {
-            ReSelect(selectedItem);
+            defaultSelectPos = Mathf.Min(defaultSelectPos, items.Count - 1);
+            ReSelect(items[defaultSelectPos]);
         }
     }
 }

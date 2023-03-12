@@ -62,7 +62,8 @@ public class CardOperator : ItemSelector
             else SwitchMode(OpMode.Option);
         }
         for (int i = 0; i < ReplaceOptions.Count; i++)
-            if (Input.GetKeyDown(commands[i]) || Input.GetKeyDown(commands2[i]) || (i == 0 && Input.GetKeyDown(KeyCode.Return)))
+            if (Input.GetKeyDown(commands[i]) || Input.GetKeyDown(commands2[i])
+            || (i == 0 && ReplaceOptions.Count == 1 && Input.GetKeyDown(KeyCode.Return)))
             {
                 PickOption(i);
                 break;
