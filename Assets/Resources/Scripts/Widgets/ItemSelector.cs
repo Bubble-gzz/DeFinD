@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class ItemSelector : ItemLayout
 {
-    ISelectable selectedItem;
-    [SerializeField]
-    SmoothObject selectIcon;
+    SmoothObject selectedItem;
+    public SmoothObject selectIcon;
+    bool active;
+    protected int defaultSelectPos;
 
     // Update is called once per frame
+    protected override void Awake()
+    {
+        base.Awake();
+        active = true;
+    }
     override protected void Start()
     {
         base.Start();
@@ -22,6 +28,7 @@ public class ItemSelector : ItemLayout
     }
     void UserInputs()
     {
+        if (!active || selectIcon == null) return;
         int selectDelta = 0;
         if (Input.GetKeyDown(KeyCode.LeftArrow)) selectDelta--;
         if (Input.GetKeyDown(KeyCode.RightArrow)) selectDelta++;
@@ -30,25 +37,17 @@ public class ItemSelector : ItemLayout
         if (selectDelta != 0 && inBoundary(select + selectDelta))
         {
             select += selectDelta;
-            ReSelect(items[select].GetComponent<ISelectable>());
+            ReSelect(items[select]);
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.DownArrow))
         {
-            items[select].GetComponent<ISelectable>().Hit();
+            items[select].GetComponentInChildren<ISelectable>().Hit();
         }
-        /* Debug
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                AddCard(Random.Range(0, cards.Count));
-            }
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                DelCard(Random.Range(0, cards.Count));
-            }
-        */
     }
     void UpdateSelectIcon()
     {
+        if (!active) return;
+        if (selectIcon == null) return;
         if (items.Count == 0)
         {
             selectIcon.gameObject.SetActive(false);
@@ -56,7 +55,7 @@ public class ItemSelector : ItemLayout
         else
         {
             if (selectedItem == null) {
-                ReSelect(items[0].GetComponent<ISelectable>());
+                ReSelect(items[0]);
             }
             selectIcon.gameObject.SetActive(true);
             selectIcon.targetPos = selectedItem.transform.localPosition;  
@@ -66,22 +65,44 @@ public class ItemSelector : ItemLayout
     {
         base.DelItem(pos);
         if (items.Count == 0) selectedItem = null;
-        else if (pos >= items.Count) ReSelect(items[items.Count - 1] as ISelectable);
-        else ReSelect(items[pos] as ISelectable);
+        else if (pos >= items.Count) ReSelect(items[items.Count - 1]);
+        else ReSelect(items[pos]);
     }
     int GetSelectedIndex()
     {
         if (selectedItem == null) return -1;
         return items.IndexOf((SmoothObject)selectedItem);
     }
+    protected void SelectWithIndex(int index)
+    {
+        if (index >= items.Count)
+        {
+            Debug.Log("[ItemSelector.SelectWithIndex]: Index out of range!");
+            return;
+        }
+        ReSelect(items[index]);
+    }
     bool inBoundary(int pos)
     {
         return (pos >= 0 && pos < items.Count);
     }
-    void ReSelect(ISelectable newItem)
+    void ReSelect(SmoothObject newItem)
     {
-        if (selectedItem != null) selectedItem.SetHighlight(false);
+        if (selectedItem != null) selectedItem.GetComponentInChildren<ISelectable>().SetHighlight(false);
         selectedItem = newItem;
-        if (selectedItem != null) selectedItem.SetHighlight(true);
+        if (selectedItem != null) selectedItem.GetComponentInChildren<ISelectable>().SetHighlight(true);
+    }
+    public void SetActive(bool flag)
+    {
+        if (flag == active) return;
+        flag = active;
+        if (!active)
+        {
+            ReSelect(null);
+        }
+        else
+        {
+            ReSelect(selectedItem);
+        }
     }
 }

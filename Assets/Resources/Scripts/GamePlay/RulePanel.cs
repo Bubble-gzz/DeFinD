@@ -159,8 +159,8 @@ public class RulePanel : MonoBehaviour
         }
         UpdateReplaceOptions();
     }
-    List<char> commands = new List<char>{
-        'A','B','C','D','E','F','G','H','I','J','K'
+    List<string> commands = new List<string>{
+        "I","II","III","IV","V","VI","VII","VIII","IX","X"
     };
     void UpdateReplaceOptions()
     {   
@@ -196,7 +196,7 @@ public class RulePanel : MonoBehaviour
             foreach(var option in ReplaceOptions)
             {
                 //option.maxWidth = optionLayout.maxWidth / (ReplaceOptions.Count + 1) * 0.4f;
-                if (ReplaceOptions.Count > 1) option.text.text = commands[i].ToString();
+                if (ReplaceOptions.Count > 1) option.text.text = commands[i];
                 else option.text.text = "Enter";
                 i++;
             }

@@ -7,9 +7,18 @@ using System.Text;
 public class CardOperator : ItemSelector
 {
     public GameObject cardPrefab;
+    public GameObject selectIconPrefab;
+    public ItemSelector optionMenu;
+
     PuzzleInfo puzzleInfo;
     StringBuilder cardS;
     StringBuilder sb;
+    SmoothObject lastSelectIcon;
+    enum OpMode{
+        Option,
+        Card
+    }
+    OpMode opMode;
     override protected void Awake()
     {
         base.Awake();
@@ -17,12 +26,17 @@ public class CardOperator : ItemSelector
         sb = new StringBuilder();
         Global.cardOperator = this;
         ReplaceOptions = new List<ReplaceOption>();
+        lastSelectIcon = null;
+        selectIcon = Instantiate(selectIconPrefab, transform).GetComponent<SmoothObject>();
+        SetActive(true);
+        opMode = OpMode.Card;
     }
     override protected void Start()
     {
         base.Start();
         puzzleInfo = Global.puzzleInfo;
         CreateCards(puzzleInfo.Init);
+        SelectWithIndex((items.Count - 1)/ 2);
     }
 
     override protected void Update()
@@ -31,14 +45,64 @@ public class CardOperator : ItemSelector
         UserInputs();
     }
     List<KeyCode> commands = new List<KeyCode>(){
-        KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D,
-        KeyCode.E, KeyCode.F, KeyCode.G, KeyCode.H,
+        KeyCode.Keypad1, KeyCode.Keypad2, KeyCode.Keypad3, KeyCode.Keypad4,
+        KeyCode.Keypad5, KeyCode.Keypad6, KeyCode.Keypad7, KeyCode.Keypad8
+    };
+    List<KeyCode> commands2 = new List<KeyCode>(){
+        KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4,
+        KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8
     };
     void UserInputs()
     {
+        if (opMode == OpMode.Option && ReplaceOptions.Count == 0)
+            SwitchMode(OpMode.Card);
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (opMode == OpMode.Option) SwitchMode(OpMode.Card);
+            else SwitchMode(OpMode.Option);
+        }
         for (int i = 0; i < ReplaceOptions.Count; i++)
-            if (Input.GetKeyDown(commands[i]) || (i == 0 && Input.GetKeyDown(KeyCode.Return)))
+            if (Input.GetKeyDown(commands[i]) || Input.GetKeyDown(commands2[i]) || (i == 0 && Input.GetKeyDown(KeyCode.Return)))
             {
+                PickOption(i);
+                break;
+            }
+    }
+    void SwitchMode(OpMode newMode)
+    {
+        if (opMode == newMode) return;
+        if (newMode == OpMode.Option && ReplaceOptions.Count < 1) return;
+        opMode = newMode;
+        if (opMode == OpMode.Option)
+        {
+            optionMenu.selectIcon = selectIcon;
+            selectIcon.transform.SetParent(optionMenu.transform);
+            lastSelectIcon = selectIcon;
+            selectIcon = null;
+            SetActive(false);
+            optionMenu.SetActive(true);
+        }
+        else
+        {
+            StartCoroutine(SelectIconFlyAway(optionMenu.selectIcon));
+            optionMenu.SetActive(false);
+            optionMenu.selectIcon = null;
+            selectIcon = Instantiate(selectIconPrefab, transform).GetComponent<SmoothObject>();
+            selectIcon.transform.localPosition = new Vector3(0, -7, 0);
+            SetActive(true);
+        }
+    }
+    IEnumerator SelectIconFlyAway(SmoothObject icon)
+    {
+        icon.targetPos = new Vector2(0, 7);
+        yield return new WaitForSeconds(0.7f);
+        Destroy(icon.gameObject);
+    }
+    public void PickOption(ReplaceOption option)
+    {
+        for (int i = 0; i < ReplaceOptions.Count; i++)
+            if (ReplaceOptions[i] == option)
+            {   
                 PickOption(i);
                 break;
             }

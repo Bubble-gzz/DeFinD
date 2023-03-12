@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class ReplaceOption : ItemLayout
+public class ReplaceOption : ItemLayout, ISelectable
 {
     // Start is called before the first frame update
     public GameObject CardPrefab;
@@ -57,5 +57,22 @@ public class ReplaceOption : ItemLayout
     public void Use()
     {
         
+    }
+
+    public void SetHighlight(bool flag)
+    {
+        if (flag)
+        {
+            motion.targetSize = new Vector2(1.2f, 1.2f);
+        }
+        else
+        {
+            motion.targetSize = new Vector2(1, 1);
+        }
+    }
+
+    public void Hit()
+    {
+        Global.cardOperator.PickOption(this);
     }
 }
