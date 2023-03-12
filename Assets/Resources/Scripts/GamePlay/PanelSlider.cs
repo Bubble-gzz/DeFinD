@@ -20,12 +20,12 @@ public class PanelSlider : MonoBehaviour
     SmoothObject leftArrow, rightArrow;
     void Awake()
     {
-        slider = transform.Find("Slider").gameObject;
+        slider = transform.Find("sub panel/Slider").gameObject;
         leftArrow = transform.Find("leftArrow").GetComponent<SmoothObject>();
         rightArrow = transform.Find("rightArrow").GetComponent<SmoothObject>();
 
         motion = slider.AddComponent<SmoothObject>();
-        motion.posFollowSpeed = 30f;
+        motion.posFollowSpeed = 10f;
         motion.sizeFollowSpeed = 40f;
 
         pages = new List<Transform>();
@@ -62,6 +62,7 @@ public class PanelSlider : MonoBehaviour
         {
             if (curPage > 0) {
                 curPage--;
+                leftArrow.transform.localPosition = new Vector3(-6.2f, 0, 0);
                 UpdatePos();
             }
         }
@@ -70,6 +71,7 @@ public class PanelSlider : MonoBehaviour
             if (curPage + 1 < pageCount)
             {
                 curPage++;
+                rightArrow.transform.localPosition = new Vector3(6.2f, 0, 0);
                 UpdatePos();
             }
         }
