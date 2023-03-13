@@ -20,7 +20,15 @@ public class Utils
     }
     static public bool GetKeyDown(KeyCode key)
     {
+        if (Global.keyEnable == null) KeyInitialize();
         if (Input.GetKeyDown(key) && Global.keyEnable[key]) return true;
         return false;
+    }
+    static public void KeyInitialize()
+    {
+        Dictionary<KeyCode, bool> keyEnable = new Dictionary<KeyCode, bool>();
+        foreach(KeyCode key in System.Enum.GetValues(typeof(KeyCode)))
+            if (!keyEnable.ContainsKey(key)) keyEnable.Add(key, true);
+        Global.keyEnable = keyEnable;
     }
 }

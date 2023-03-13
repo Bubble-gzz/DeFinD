@@ -91,8 +91,8 @@ public class RulePanel : MonoBehaviour
             layoutSettings.maxWidth = maxWidth;
             layoutSettings.alignment = ItemLayout.Alignment.Center;
             layoutSettings.nested = true;
-            layoutSettings.defaultInterval = 1.2f;
-            layoutSettings.minInterval = 0.7f;
+            layoutSettings.defaultInterval = 1.6f;
+            layoutSettings.minInterval = 1.3f;
             slider.AppendPage(newPage.transform);
             pages.Add(layoutSettings);
         }

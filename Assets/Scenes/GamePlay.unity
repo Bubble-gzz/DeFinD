@@ -961,7 +961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c47dd773402fb45aea5c409ea080b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleName: Example
+  puzzleName: 1-5
   gameCardPrefab: {fileID: 7510484210693341985, guid: 74e985bdd69f27c42b4ace619c0511f0, type: 3}
 --- !u!1 &528749464
 GameObject:
@@ -1007,6 +1007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b09e346d45e99004e9d1b3b90d812403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoAddChildren: 0
   alignment: 1
   nested: 0
   maxWidth: 2
@@ -1200,6 +1201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b09e346d45e99004e9d1b3b90d812403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoAddChildren: 0
   alignment: 1
   nested: 0
   maxWidth: 2
@@ -1563,6 +1565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa905e2de18686644bd932c4b104e218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoAddChildren: 0
   alignment: 1
   nested: 1
   maxWidth: 10
@@ -2903,6 +2906,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1c5a681d574d2c4ebc8e52670fcd489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoAddChildren: 0
   alignment: 1
   nested: 0
   maxWidth: 9

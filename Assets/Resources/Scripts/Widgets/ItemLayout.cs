@@ -11,6 +11,7 @@ public class ItemLayout : MonoBehaviour
         Right,
         Spread
     }
+    public bool autoAddChildren;
     public Alignment alignment;
     public bool nested;
     public float maxWidth;
@@ -36,6 +37,8 @@ public class ItemLayout : MonoBehaviour
         motion.sizeFollowSpeed = sizeFollowSpeed;
         items = new List<SmoothObject>();
         if (minInterval < 0.001f) minInterval = 1f;
+        if (autoAddChildren)
+            AddChildren();
     }
     virtual protected void Start()
     {
@@ -46,7 +49,16 @@ public class ItemLayout : MonoBehaviour
     virtual protected void Update()
     {
     }
-
+    void AddChildren()
+    {
+        Transform items = transform.Find("items");
+        List<Transform> children = new List<Transform>();
+        foreach(Transform child in items) children.Add(child);
+        foreach(Transform child in children)
+        {
+            AppendItem(child);
+        }
+    }
     bool inBoundary(int pos)
     {
         return (pos >= 0 && pos < items.Count);
