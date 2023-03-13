@@ -30,8 +30,8 @@ public class ItemSelector : ItemLayout
     {
         if (!active || selectIcon == null) return;
         int selectDelta = 0;
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) selectDelta--;
-        if (Input.GetKeyDown(KeyCode.RightArrow)) selectDelta++;
+        if (Utils.GetKeyDown(KeyCode.LeftArrow)) selectDelta--;
+        if (Utils.GetKeyDown(KeyCode.RightArrow)) selectDelta++;
         
         int select = GetSelectedIndex();
         if (selectDelta != 0 && inBoundary(select + selectDelta))
@@ -39,7 +39,7 @@ public class ItemSelector : ItemLayout
             select += selectDelta;
             ReSelect(items[select]);
         }
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.DownArrow))
+        if (Utils.GetKeyDown(KeyCode.Space) || Utils.GetKeyDown(KeyCode.DownArrow))
         {
             items[select].GetComponentInChildren<ISelectable>().Hit();
         }

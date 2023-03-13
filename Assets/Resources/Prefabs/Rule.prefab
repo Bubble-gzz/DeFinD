@@ -47,7 +47,7 @@ MonoBehaviour:
   nested: 0
   maxWidth: 100
   width: 0
-  defaultInterval: 1.5
+  defaultInterval: 1.1
   minInterval: 1
   posFollowSpeed: 40
   sizeFollowSpeed: 40

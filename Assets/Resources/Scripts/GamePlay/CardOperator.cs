@@ -56,14 +56,14 @@ public class CardOperator : ItemSelector
     {
         if (opMode == OpMode.Option && ReplaceOptions.Count == 0)
             SwitchMode(OpMode.Card);
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Utils.GetKeyDown(KeyCode.UpArrow))
         {
             if (opMode == OpMode.Option) SwitchMode(OpMode.Card);
             else SwitchMode(OpMode.Option);
         }
         for (int i = 0; i < ReplaceOptions.Count; i++)
-            if (Input.GetKeyDown(commands[i]) || Input.GetKeyDown(commands2[i])
-            || (i == 0 && ReplaceOptions.Count == 1 && Input.GetKeyDown(KeyCode.Return)))
+            if (Utils.GetKeyDown(commands[i]) || Utils.GetKeyDown(commands2[i])
+            || (i == 0 && ReplaceOptions.Count == 1 && Utils.GetKeyDown(KeyCode.Return)))
             {
                 PickOption(i);
                 break;

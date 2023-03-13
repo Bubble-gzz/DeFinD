@@ -57,7 +57,7 @@ public class PanelSlider : MonoBehaviour
     }
     void UserInput()
     {
-        if (Input.GetKeyDown(leftKey))
+        if (Utils.GetKeyDown(leftKey))
         {
             if (curPage > 0) {
                 curPage--;
@@ -65,7 +65,7 @@ public class PanelSlider : MonoBehaviour
                 UpdatePos();
             }
         }
-        if (Input.GetKeyDown(rightKey))
+        if (Utils.GetKeyDown(rightKey))
         {
             if (curPage + 1 < pageCount)
             {

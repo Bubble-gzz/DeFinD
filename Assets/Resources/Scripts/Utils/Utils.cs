@@ -18,4 +18,9 @@ public class Utils
         }
         return res;
     }
+    static public bool GetKeyDown(KeyCode key)
+    {
+        if (Input.GetKeyDown(key) && Global.keyEnable[key]) return true;
+        return false;
+    }
 }

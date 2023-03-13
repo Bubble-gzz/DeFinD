@@ -11,6 +11,14 @@ public class GameInitializer : MonoBehaviour
     {
         Global.gameCardPrefab = gameCardPrefab;
         LoadPuzzle(puzzleName);
+        KeyInitialize();
+    }
+    void KeyInitialize()
+    {
+        Dictionary<KeyCode, bool> keyEnable = new Dictionary<KeyCode, bool>();
+        foreach(KeyCode key in System.Enum.GetValues(typeof(KeyCode)))
+            if (!keyEnable.ContainsKey(key)) keyEnable.Add(key, true);
+        Global.keyEnable = keyEnable;
     }
     void Start()
     {

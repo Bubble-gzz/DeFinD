@@ -149,7 +149,7 @@ MonoBehaviour:
   nested: 0
   maxWidth: 100
   width: 0
-  defaultInterval: 1.5
+  defaultInterval: 1.1
   minInterval: 1
   posFollowSpeed: 40
   sizeFollowSpeed: 40
@@ -169,6 +169,7 @@ MonoBehaviour:
   s: 
   normalColor: {r: 0.6431373, g: 0.6431373, b: 0.6431373, a: 1}
   accpetedColor: {r: 0.8773585, g: 0.5970304, b: 0.2530387, a: 1}
+  accepted: 0
 --- !u!1 &6285269206858944245
 GameObject:
   m_ObjectHideFlags: 0

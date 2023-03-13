@@ -12,4 +12,5 @@ public class Global
     static public TargetPanel targetPanel;
     static public GameObject gameCardPrefab;
     static public bool puzzleComplete;
+    static public Dictionary<KeyCode, bool> keyEnable;
 }
