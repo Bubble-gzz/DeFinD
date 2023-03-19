@@ -21,7 +21,7 @@ public class Utils
     static public bool GetKeyDown(KeyCode key)
     {
         if (Global.keyEnable == null) KeyInitialize();
-        if (Input.GetKeyDown(key) && Global.keyEnable[key]) return true;
+        if (Global.allKeysEnable && Global.keyEnable[key] && Input.GetKeyDown(key)) return true;
         return false;
     }
     static public void KeyInitialize()
@@ -30,5 +30,10 @@ public class Utils
         foreach(KeyCode key in System.Enum.GetValues(typeof(KeyCode)))
             if (!keyEnable.ContainsKey(key)) keyEnable.Add(key, true);
         Global.keyEnable = keyEnable;
+        Global.allKeysEnable = true;
+    }
+    static public void SetAllKeys(bool flag)
+    {
+        Global.allKeysEnable = flag;
     }
 }

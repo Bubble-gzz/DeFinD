@@ -13,4 +13,5 @@ public class Global
     static public GameObject gameCardPrefab;
     static public bool puzzleComplete;
     static public Dictionary<KeyCode, bool> keyEnable;
+    static public bool allKeysEnable;
 }
